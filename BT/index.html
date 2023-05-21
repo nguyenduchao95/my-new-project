@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+
+<script>
+    //1. myStr = "You guys try to do the exercises because doing more exercises helps us understand the theory and solve problems better"
+    //Viết chương trình đếm số từ trong chuỗi trên.
+    //Viết chương trình tìm từ dài nhất và số chữ cái trong từ đó.
+    //Viết chương trình đếm số từ xuất hiện nhiều nhất trong chuỗi trên.
+    //Viết chương trình đếm số chữ cái xuất hiện nhiều nhất trong chuỗi trên.
+    let myStr = "You guys try to do the exercises because doing more exercises helps us understand the theory and solve problems better";
+    let myStrArr = myStr.split(' ');
+    console.log('Số từ trong chuỗi trên là: ' + myStrArr.length);
+
+    let max = myStrArr[0].length;
+    for (let i of myStrArr) {
+        if (i.length > max) {
+            max = i.length;
+        }
+    }
+    let strMax = myStrArr.filter(item => item.length == max);
+    console.log(`Từ dài nhất là: ${strMax.join()} và số chữ cái trong từ đó là: ${max}`);
+
+    let rs1 = countArr(myStrArr.sort());
+    let max1 = Math.max(...rs1);
+    function indexArr(arr, max) {
+        let rs = [];
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i] == max) rs.push(i);
+        }
+        return rs;
+    }
+    let indexArr1 = indexArr(rs1, max1);
+    console.log(`Phần tử xuất hiện nhiều nhất là ${myStrArr.filter((item, index) => indexArr1.includes(index))} và Số lần xuất hiện của phần tử đó là: ${max1}`);
+
+    //2. myArr = [1, 2, 2, 7, 8, 8, 8]
+    //Viết CT tìm phần tử xuất hiện nhiều nhất và số lần xuất hiện của phần tử đó => 8: 3
+    //Viết CT loại bỏ các phần tử trùng lặp trong mảng => [1, 2, 7, 8]
+    let myArr = [1, 2, 2, 7, 8, 8, 8];
+    function countArr(arr) {
+        let rs = [];
+        for (let i = 0; i < arr.length; i++) {
+            let count = 1;
+            for (let j = i + 1; j < arr.length; j++) {
+                if (arr[j] !== arr[i]) break;
+                count++;
+            }
+            rs.push(count);
+        }
+        return rs;
+    }
+    let rs21 = countArr(myArr);
+    let max21 = Math.max(...rs21);
+    console.log(`Phần tử xuất hiện nhiều nhất là ${myArr[rs21.indexOf(max21)]} và Số lần xuất hiện của phần tử đó là: ${max21}`);
+
+    let rs22 = [];
+    for (let i = 0; i < myArr.length; i++) {
+        if (myArr[i] !== myArr[i - 1]) rs22.push(myArr[i]);
+    }
+    console.log(rs22);
+
+    //3. Yêu cầu người dùng nhập họ tên vào ô input, sau đó đọc và in ra họ tên người đó đúng chính tả.
+    // let input = prompt('Nhập họ tên');
+    let input = 'abc'
+    let inputArr = input.trim().split(' ');
+    let rs3 = []
+    for (let i of inputArr) {
+        if (i.trim()) rs3.push(i.trim()[0].toUpperCase() + i.trim().slice(1).toLowerCase());
+    }
+    console.log(rs3.join(' '));
+</script>
